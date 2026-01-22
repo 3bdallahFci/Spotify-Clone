@@ -1,0 +1,12 @@
+import User from "../models/user.model";
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const currentUserId = req.auth.userId;
+    const users = await User.find({ clerkId: { $ne: currentUserId } });
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
