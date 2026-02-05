@@ -21,8 +21,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const token = await getToken();
         if (!token) return;
         updateAuthState(token);
-        console.log("User ID:", userId);
-        console.log("Token:", token);
       } catch (error) {
         console.error("Error fetching auth token:", error);
       } finally {

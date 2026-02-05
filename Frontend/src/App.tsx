@@ -1,6 +1,5 @@
 import "./index.css";
 import React from "react";
-import { Button } from "./components/ui/button";
 import {
   AuthenticateWithRedirectCallback,
   SignedIn,
@@ -9,17 +8,15 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import { Routes, Route } from "react-router";
-import { Home } from "lucide-react";
 import HomePage from "./pages/HomePage.tsx";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
-import Topbar from "./components/ui/Topbar.tsx";
+import MainLayout from "./Layouts/MainLayout.tsx";
+import ChatPage from "./pages/ChatPage.tsx";
 
 function App() {
   return (
     <>
-      <Topbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route
           path="/sso-callback"
           element={
@@ -29,6 +26,10 @@ function App() {
           }
         />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/chat" element={<ChatPage />}/>
+        </Route>
       </Routes>
     </>
   );

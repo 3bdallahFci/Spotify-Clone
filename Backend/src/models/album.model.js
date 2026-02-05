@@ -6,7 +6,7 @@ const albumSchema = new mongoose.Schema(
     artist: { type: String, required: true },
     releaseYear: { type: Number, required: true },
     imageUrl: { type: String, required: true },
-    songs: { type: mongoose.Schema.Types.ObjectId, ref: "Song" },
+    songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
   },
   { timestamps: true }
 );

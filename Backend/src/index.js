@@ -10,7 +10,7 @@ import path from "path";
 import adminRoutes from "./routes/admin.route.js";
 import authRoutes from "./routes/auth.route.js";
 // import songsRoutes from "./routes/song.route.js";
-// import albumsRoutes from "./routes/album.route.js";
+import albumsRoutes from "./routes/album.route.js";
 // import statsRoutes from "./routes/stat.route.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 // app.use("/api/songs", songsRoutes);
-// app.use("/api/albums", albumsRoutes);
+app.use("/api/albums", albumsRoutes);
 // app.use("/api/stats", statsRoutes);
 
 app.listen(3000, () => {
