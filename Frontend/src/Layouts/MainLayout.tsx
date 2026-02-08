@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { ResizablePanelGroup,ResizablePanel,ResizableHandle } from '@/components/ui/resizable'
 import LeftSidebar from '@/components/ui/LeftSidebar';
+import FirendActivity from '@/pages/FriendActivity';
 
 const MainLayout = () => {
   return (
@@ -21,7 +22,7 @@ const MainLayout = () => {
             <ResizableHandle className="bg-gray-700 w-1 cursor-col-resize hover:bg-gray-500"/>
 
             <ResizablePanel maxSize={25} minSize={0} defaultSize={20} collapsedSize={0}>
-                    Activity
+                    <FirendActivity />
             </ResizablePanel>
       </ResizablePanelGroup>
     </div>

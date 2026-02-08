@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import fileupload from "express-fileupload";
 import path from "path";
-// import usersRoutes from "./routes/user.route.js";
+import usersRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import authRoutes from "./routes/auth.route.js";
 // import songsRoutes from "./routes/song.route.js";
@@ -32,7 +32,7 @@ app.use(
 );
 app.use(clerkMiddleware());
 app.use(bodyParser.json());
-// app.use("/api/users", usersRoutes);
+app.use("/api/users", usersRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {

@@ -16,7 +16,6 @@ const LeftSidebar = () => {
     fetchAlbums();
   }, [fetchAlbums]);
 
-  console.log(albums);
   
 
  return (

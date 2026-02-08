@@ -7,5 +7,5 @@ import {
 const router = express.Router();
 
 router.get("/", getAllAlbums);
-router.get("/:id", getAlbumById);
+router.get("/:albumId", getAlbumById);
 export default router;

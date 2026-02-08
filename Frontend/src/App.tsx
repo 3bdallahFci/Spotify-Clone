@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage.tsx";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
 import MainLayout from "./Layouts/MainLayout.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
+import AlbumPage from "./pages/AlbumPage.tsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/album/:albumId" element={<AlbumPage />}/>
           <Route path="/chat" element={<ChatPage />}/>
         </Route>
       </Routes>
