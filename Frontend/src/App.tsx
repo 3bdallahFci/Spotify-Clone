@@ -8,11 +8,12 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import { Routes, Route } from "react-router";
-import HomePage from "./pages/HomePage.tsx";
+import HomePage from "./home/HomePage.tsx";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
 import MainLayout from "./Layouts/MainLayout.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
 import AlbumPage from "./pages/AlbumPage.tsx";
+import AudioPlayer from "./components/AudioPlayer.tsx";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/audioplayer" element={<AudioPlayer />} />
           <Route path="/album/:albumId" element={<AlbumPage />}/>
           <Route path="/chat" element={<ChatPage />}/>
         </Route>

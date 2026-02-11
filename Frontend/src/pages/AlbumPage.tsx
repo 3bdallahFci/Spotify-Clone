@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Clock, Pause, Play } from "lucide-react";
+import { usePlayerStore } from "@/stores/usePlayerStore";
 export const formatDuration = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -12,20 +13,35 @@ export const formatDuration = (seconds: number) => {
 const AlbumPage = () => {
   const { albumId } = useParams();
   const { fetchAlbumsById, currentAlbum, isLoading } = useMusicStore();
-  const { isPlaying, currentSong, playSongs } = useMusicStore();
+  const { isPlaying, currentSong, playAlbum, togglePlay } = usePlayerStore();
 
   const handlePlayAlbum = () => {
-    if (currentAlbum) {
-        playSongs(currentAlbum.songs, 0);
+    if (!currentAlbum) return;
+
+    const isCurrentAlbumPlaying = currentAlbum?.songs.some(
+      (song) => song._id === currentSong?._id,
+    );
+    if (isCurrentAlbumPlaying) togglePlay();
+    else {
+      // start playing the album from the beginning
+      playAlbum(currentAlbum?.songs, 0);
     }
   };
-    const handlePlaySong = (index: number) => {
-        if (currentAlbum) {
-            playSongs(currentAlbum.songs, index);
-        }
-    };
+  const handlePlaySong = (index: number) => {
+    if (!currentAlbum) return;
 
-    
+    const selectedSong = currentAlbum.songs[index];
+
+    // If clicking the same song → toggle play/pause
+    if (currentSong?._id === selectedSong._id) {
+      togglePlay();
+      return;
+    }
+
+    // Otherwise play new song
+    playAlbum(currentAlbum.songs, index);
+  };
+
   React.useEffect(() => {
     if (albumId) {
       fetchAlbumsById(albumId);
@@ -135,7 +151,11 @@ const AlbumPage = () => {
                           />
 
                           <div>
-                            <div className={`font-medium text-white`}>
+                            <div
+                              className={`font-medium ${
+                                isCurrentSong ? "text-green-500" : "text-white"
+                              }`}
+                            >
                               {song.title}
                             </div>
                             <div>{song.artist}</div>

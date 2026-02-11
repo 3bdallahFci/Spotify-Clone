@@ -9,6 +9,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const updateAuthState = async (token: string) => {
     if (token) {
+      console.log(token);
+
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {
       delete axios.defaults.headers.common["Authorization"];
