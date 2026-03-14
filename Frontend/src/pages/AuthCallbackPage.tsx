@@ -12,10 +12,9 @@ const AuthCallbackPage = () => {
     const syncUser = async () => {
       try {
         if (!isLoaded || !user) return;
-
         await axiosInstance.post("/auth/callback", {
           id: user.id,
-          username: `${user.firstName} ${user.lastName}`,
+          username: `${user.firstName || ""} ${user.lastName || ""}`.trim(),
           imageUrl: user.imageUrl,
         });
       } catch (error) {

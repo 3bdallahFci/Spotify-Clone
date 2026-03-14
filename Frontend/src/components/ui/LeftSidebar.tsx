@@ -33,8 +33,8 @@ const LeftSidebar = () => {
 							})
 						)}
 					>
-						<HomeIcon className='mr-2 size-5' />
-						<span className='hidden md:inline'>Home</span>
+						<HomeIcon className='mr-2 size-5 text-white' />
+						<span className='hidden md:inline text-white'>Home</span>
 					</Link>
 
 					<SignedIn>

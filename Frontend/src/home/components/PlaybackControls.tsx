@@ -17,14 +17,13 @@ import { usePlayerStore } from "@/stores/usePlayerStore";
 import { Slider } from "@/components/ui/slider";
 
 const PlaybackControls = () => {
-  const [volume, setVolume] = useState(0);
+  const [volume, setVolume] = useState(75);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const audioref = useRef<HTMLAudioElement | null>(null);
   const { currentSong, isPlaying, togglePlay, playNext, playPrevious } =
     usePlayerStore();
 
-    console.log("volume : ", volume);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

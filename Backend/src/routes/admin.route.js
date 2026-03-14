@@ -10,10 +10,10 @@ import {
 } from "../controllers/admin.controller.js";
 
 const router = express.Router();
-router.get("/check", protectRoute, requireAdmin, checkAdmin);
-router.post("/create-song", protectRoute, requireAdmin, createSong);
-router.delete("/delete-song/:id", protectRoute, requireAdmin, deleteSong);
-router.post("/create-album", protectRoute, requireAdmin, createAlbum);
-router.delete("/delete-album/:id", protectRoute, requireAdmin, deleteAlbum);
+router.get("/check", checkAdmin);
+router.post("/create-song", createSong);
+router.delete("/delete-song/:id", deleteSong);
+router.post("/create-album", createAlbum);
+router.delete("/delete-album/:id", deleteAlbum);
 
 export default router;

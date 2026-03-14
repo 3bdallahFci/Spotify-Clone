@@ -11,13 +11,16 @@ import { Routes, Route } from "react-router";
 import HomePage from "./home/HomePage.tsx";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
 import MainLayout from "./Layouts/MainLayout.tsx";
-import ChatPage from "./pages/ChatPage.tsx";
+import ChatPage from "./pages/Chat/ChatPage.tsx";
 import AlbumPage from "./pages/AlbumPage.tsx";
 import AudioPlayer from "./components/AudioPlayer.tsx";
-
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import AdminPage from "./admin/adminPage.tsx";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
+    
       <Routes>
         <Route
           path="/sso-callback"
@@ -27,6 +30,7 @@ function App() {
             />
           }
         />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/auth-callback" element={<AuthCallbackPage />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
@@ -34,7 +38,10 @@ function App() {
           <Route path="/album/:albumId" element={<AlbumPage />}/>
           <Route path="/chat" element={<ChatPage />}/>
         </Route>
+
+        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
+      <Toaster />
     </>
   );
 }

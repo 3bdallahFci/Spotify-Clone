@@ -6,13 +6,20 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import fileupload from "express-fileupload";
 import path from "path";
+
+import { initalizeSocket } from "./utils/socket.js";
+
 import usersRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
 import authRoutes from "./routes/auth.route.js";
 import songsRoutes from "./routes/song.route.js";
 import albumsRoutes from "./routes/album.route.js";
-// import statsRoutes from "./routes/stat.route.js";
+import statsRoutes from "./routes/stat.route.js";
+import { createServer } from "http";
 const app = express();
+
+const httpserver = createServer(app);
+initalizeSocket(httpserver);
 app.use(clerkMiddleware());
 const PORT = process.env.PORT || 5000;
 dotenv.config();
@@ -41,9 +48,9 @@ app.get("/", (req, res) => {
 });
 app.use("/api/songs", songsRoutes);
 app.use("/api/albums", albumsRoutes);
-// app.use("/api/stats", statsRoutes);
+app.use("/api/stats", statsRoutes);
 
-app.listen(3000, () => {
+httpserver.listen(3000, () => {
   console.log(`Server is running on http://localhost:${3000}`);
   mongoose
     .connect(

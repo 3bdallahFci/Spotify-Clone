@@ -135,7 +135,7 @@ const songs = [
 
 const seedSongs = async () => {
 	try {
-		await mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/spotify_clone_db;",)
+		await mongoose.connect(process.env.MONGODB_URI||"mongodb://localhost:27017/spotify_clone_db",)
 
 		// Clear existing songs
 		await Song.deleteMany({});

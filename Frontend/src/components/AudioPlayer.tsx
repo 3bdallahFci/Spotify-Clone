@@ -11,7 +11,6 @@ function AudioPlayer() {
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
-        console.log("playing from audioplayer");
         
         audioRef.current.play();
       } else {
@@ -34,7 +33,6 @@ function AudioPlayer() {
 		// check if this is actually a new song
 		const isSongChange = prevSongRef.current !== currentSong?.audioUrl;
 		if (isSongChange) {
-      console.log("change audioUrl to:", currentSong?.audioUrl);
       
 			audio.src = currentSong?.audioUrl;
 			// reset the playback position

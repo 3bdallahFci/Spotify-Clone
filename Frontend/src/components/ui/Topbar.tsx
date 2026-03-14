@@ -27,8 +27,10 @@ const Topbar = () => {
 					</Link>
 				)}
 
-				<SignedOut>
-					<SignInOAuthButtons />
+				<SignedOut >
+					<div >
+						<SignInOAuthButtons />
+					</div>
 				</SignedOut>
 
 				<UserButton />

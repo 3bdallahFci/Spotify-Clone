@@ -39,7 +39,7 @@ export const getMadeForYouSongs = async (req, res, next) => {
 	try {
 		const songs = await Song.aggregate([
 			{
-				$sample: { size: 4 },
+				$sample: { size: 10 },
 			},
 			{
 				$project: {

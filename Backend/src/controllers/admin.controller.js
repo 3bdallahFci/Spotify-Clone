@@ -3,12 +3,13 @@ import Album from "../models/album.model.js";
 import cloudinary from "../utils/Cloudinary.js";
 export const createSong = async (req, res) => {
   try {
-    const { title, artist, album } = req.body;
+    const { title, artist, albumId,duration } = req.body;
     const audioFile = req.files?.audioFile;
     const imageFile = req.files?.imageFile;
     if (!audioFile || !req.files || !imageFile) {
       return res.status(400).json({ message: "Missing required files" });
     }
+    console.log(albumId)
     // Upload audio file to Cloudinary
     const audioUpload = await cloudinary.uploader.upload(
       audioFile.tempFilePath,
@@ -27,15 +28,14 @@ export const createSong = async (req, res) => {
     const newSong = new Song({
       title,
       artist,
-      album,
+      albumId,
       audioUrl: audioUpload.secure_url,
-      audioPublicId: audioUpload.public_id,
       imageUrl: imageUpload.secure_url,
-      imagePublicId: imageUpload.public_id,
+      duration
     });
     await newSong.save();
-    if (album) {
-      const albumData = await Album.findById(album);
+    if (albumId) {
+      const albumData = await Album.findById(albumId);
       if (albumData) {
         albumData.songs.push(newSong._id);
         await albumData.save();
@@ -57,10 +57,7 @@ export const deleteSong = async (req, res) => {
     if (!song) {
       return res.status(404).json({ message: "Song not found" });
     }
-    // Delete audio file from Cloudinary
-    await cloudinary.uploader.destroy(song.audioPublicId);
-    // Delete image file from Cloudinary
-    await cloudinary.uploader.destroy(song.imagePublicId);
+    
 
     if (song.album) {
       await Album.findByIdAndUpdate(song.album, { $pull: { songs: song._id } });
@@ -92,7 +89,6 @@ export const createAlbum = async (req, res) => {
             artist,
             releaseYear,
             imageUrl: imageUpload.secure_url,
-            imagePublicId: imageUpload.public_id,
         });
         await newAlbum.save();
         res.status(201).json({ message: "Album created successfully", album: newAlbum });
@@ -110,7 +106,6 @@ export const deleteAlbum = async (req, res) => {
         if (!album) {
             return res.status(404).json({ message: "Album not found" });
         }
-        await cloudinary.uploader.destroy(album.imagePublicId);
         await Song.deleteMany({ _id: { $in: album.songs } }); // Delete all songs in the album
         await Album.findByIdAndDelete(id);
         res.status(200).json({ message: "Album deleted successfully" });
