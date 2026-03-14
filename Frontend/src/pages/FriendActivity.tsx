@@ -8,7 +8,6 @@ const FriendActivity = () => {
     const {fetchUsers,users,onlineUsers,userActivities} = useChatStore();
     const {user} = useUser();
 
-	console.log(userActivities);
     React.useEffect(() => {
         if(user) {			
             fetchUsers(user.id);

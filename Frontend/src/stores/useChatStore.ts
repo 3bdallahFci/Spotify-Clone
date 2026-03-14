@@ -53,10 +53,6 @@ export const useChatStore = create<ChatStore>((set, get) => ({
   },
 
   initSocket: (userId) => {
-    console.log(userId);
-    
-    console.log("invoked from auth provider");
-
     
     if (!get().isConnected) {
       socket.auth = { userId };

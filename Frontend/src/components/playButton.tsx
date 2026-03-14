@@ -10,7 +10,6 @@ const playButton = ({ song }: { song: Song }) => {
     const isCurrentSong = currentSong?._id === song._id;
   const handlePlay = () => {
     if (isCurrentSong) {
-      console.log("mounted from handleplay");
       togglePlay();
     } else {
       setCurrentSong(song);

@@ -4,10 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChatStore } from "@/stores/useChatStore";
 
 const UsersList = () => {
-	const { users, selectedUser, isLoading, setSelectedUser, onlineUsers } = useChatStore();
-
-	console.log(onlineUsers);
-	
+	const { users, selectedUser, isLoading, setSelectedUser, onlineUsers } = useChatStore();	
 
 	return (
 		<div className='border-r border-zinc-800'>

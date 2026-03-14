@@ -4,7 +4,6 @@ import Message from "../models/message.model.js";
 export const getAllUsers = async (req, res) => {
   try {
     const currentUserId = req.params.userId;
-	console.log("Current User ID:", currentUserId);
 		const users = await User.find({ clerkId: { $ne: currentUserId } });
 		res.status(200).json(users);
   } catch (error) {
@@ -15,9 +14,6 @@ export const getAllUsers = async (req, res) => {
 export const getMessages = async (req, res) => {
   try {
 		const { senderId, receiverId } = req.params;
-
-		console.log("Sender ID:", senderId);
-		console.log("Receiver ID:", receiverId);
 
 		if (!senderId || !receiverId) {
 			return res.status(400).json({ error: "Missing senderId or receiverId" });
