@@ -1,4 +1,4 @@
-# Spotify Clone (MERN)
+# SoundWave (MERN)
 
 A full-stack **Spotify-like music streaming web app** built with the **MERN stack**, featuring:
 - **Clerk** authentication (OAuth + session management)
